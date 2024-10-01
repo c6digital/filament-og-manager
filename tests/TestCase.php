@@ -17,9 +17,12 @@ use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
 use C6Digital\OgManager\OgManagerServiceProvider;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
 class TestCase extends Orchestra
 {
+    use LazilyRefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -52,9 +55,7 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_filament-og-manager_table.php.stub';
+        $migration = include __DIR__. '/../database/migrations/create_og_manager_meta_table.php.stub';
         $migration->up();
-        */
     }
 }

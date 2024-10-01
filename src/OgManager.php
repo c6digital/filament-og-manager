@@ -19,6 +19,7 @@ class OgManager
                 ->nullable()
                 ->helperText('A snippet of text that describes the site\'s content and purpose. Recommended maximum length: 200 characters.'),
             FileUpload::make('image')
+                ->visibility(OgManagerPlugin::get()->getImageVisibility())
                 ->nullable()
                 ->image()
                 ->helperText('Recommended size: 1200x630px or a 1.91:1 aspect ratio.'),

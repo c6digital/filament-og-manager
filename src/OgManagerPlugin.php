@@ -7,9 +7,23 @@ use Filament\Panel;
 
 class OgManagerPlugin implements Plugin
 {
+    protected string $imageVisibility = 'public';
+
     public function getId(): string
     {
         return 'og-manager';
+    }
+
+    public function imageVisibility(string $visibility): static
+    {
+        $this->imageVisibility = $visibility;
+
+        return $this;
+    }
+
+    public function getImageVisibility(): string
+    {
+        return $this->imageVisibility;
     }
 
     public function register(Panel $panel): void

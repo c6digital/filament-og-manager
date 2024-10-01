@@ -2,6 +2,10 @@
 
 All notable changes to `filament-og-manager` will be documented in this file.
 
+## v0.1.2 - 2024-10-01
+
+* Support changing image visibility.
+
 ## v0.1.1 - 2024-10-01
 
 * Allow customising URL generation logic.

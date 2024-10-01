@@ -10,6 +10,9 @@ use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 
+/**
+ * @property-read Form $siteSettingsForm
+ */
 class SEO extends Page
 {
     protected static string $view = 'og-manager::pages.seo';

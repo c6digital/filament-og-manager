@@ -21,7 +21,7 @@
     <meta property="og:image" content="{{ $meta->getImageUrl() }}" />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:card" content="{{ $meta->twitter_card_style ?? 'summary_large_image' }}" />
     <meta property="twitter:url" content="{{ $url ?? url()->current() }}" />
     <meta property="twitter:title" content="{{ $meta->title }}" />
     <meta property="twitter:description" content="{{ $meta->description }}" />

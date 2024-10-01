@@ -4,6 +4,7 @@ namespace C6Digital\OgManager\Tests;
 
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
+use C6Digital\OgManager\OgManagerServiceProvider;
 use Filament\Actions\ActionsServiceProvider;
 use Filament\FilamentServiceProvider;
 use Filament\Forms\FormsServiceProvider;
@@ -13,11 +14,10 @@ use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
-use C6Digital\OgManager\OgManagerServiceProvider;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 
 class TestCase extends Orchestra
 {
@@ -55,7 +55,7 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        $migration = include __DIR__. '/../database/migrations/create_og_manager_meta_table.php.stub';
+        $migration = include __DIR__ . '/../database/migrations/create_og_manager_meta_table.php.stub';
         $migration->up();
     }
 }

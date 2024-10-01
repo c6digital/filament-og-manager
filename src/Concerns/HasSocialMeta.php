@@ -5,9 +5,9 @@ namespace C6Digital\OgManager\Concerns;
 use C6Digital\OgManager\Models\Meta;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
-trait HasSocialMeta
+trait HasOpenGraphMeta
 {
-    public function socialMeta(): MorphOne
+    public function openGraphMeta(): MorphOne
     {
         return $this->morphOne(Meta::class, 'metable');
     }

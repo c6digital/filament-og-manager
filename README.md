@@ -5,49 +5,91 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/c6digital/filament-og-manager/fix-php-code-styling.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/c6digital/filament-og-manager/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/c6digital/filament-og-manager.svg?style=flat-square)](https://packagist.org/packages/c6digital/filament-og-manager)
 
-
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+This package provides a global SEO page that lets you manage Open Graph tags, as well as a set of fields to manage Open Graph tags for specific resources.
 
 ## Installation
 
-You can install the package via composer:
+You can install the package via Composer:
 
 ```bash
 composer require c6digital/filament-og-manager
 ```
 
-You can publish and run the migrations with:
+Run the installation command for the package:
 
 ```bash
-php artisan vendor:publish --tag="filament-og-manager-migrations"
-php artisan migrate
+php artisan og-manager:install
 ```
 
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="filament-og-manager-config"
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="filament-og-manager-views"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
+This will publish and execute migrations.
 
 ## Usage
 
+Register the plugin:
+
 ```php
-$ogManager = new C6Digital\OgManager();
-echo $ogManager->echoPhrase('Hello, C6Digital!');
+use C6Digital\OgManager\OgManagerPlugin;
+
+$panel
+    ->plugin(
+        OgManagerPlugin::make()
+    );
+```
+
+The global SEO page will be registered with your panel and automatically appear inside of the panel. Use this form to manage your site wide Open Graph tags.
+
+### Rendering meta tags
+
+To render meta tags in your Blade templates, use the provided component:
+
+```blade
+<head>
+    <x-og-manager::seo />
+</head>
+```
+
+### Model-specific tags
+
+This package provides a custom group of fields that you can add to your own resource forms.
+
+```php
+use C6Digital\OgManager\Components\SEO;
+
+public function form(Form $form): Form
+{
+    return $form->schema([
+        SEO::make(),
+    ]);
+}
+```
+
+You'll then need to add the `HasOpenGraphMeta` trait to your model.
+
+```php
+use C6Digital\OgManager\Concerns\HasOpenGraphMeta;
+
+class Post extends Model
+{
+    use HasOpenGraphMeta;
+}
+```
+
+This registers a new `openGraphMeta` relationship on your model which this field uses.
+
+To render meta tags for a specific model, pass the model through to the Blade component using the `for` prop.
+
+```blade
+<head>
+    <x-og-manager::seo :for="$post" />
+</head>
+```
+
+### Changing the URL
+
+This package defaults to using `url()->current()` when rendering meta tags (`og:url`, `twitter:url`). If you want to change URL you can pass it through as a prop to the Blade component.
+
+```blade
+<x-og-manager::seo :url="route('posts.show', $post)" />
 ```
 
 ## Testing

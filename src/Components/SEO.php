@@ -10,7 +10,7 @@ class SEO extends Group
     protected function setUp(): void
     {
         $this->columns(1);
-        $this->relationship('socialMeta');
+        $this->relationship('openGraphMeta');
         $this->schema(OgManager::getDefaultFormSchema());
     }
 }
